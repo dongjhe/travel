@@ -1,0 +1,162 @@
+<main class="wrap">
+  <section class="hero">
+    <p class="eyebrow">Travel Expense Analyzer</p>
+    <h1>旅遊消費分析</h1>
+    <p class="lead">
+      輸入日幣消費，例如「超商 200」、「UNIQLO 刷卡
+      5000」，系統會自動列成表格，並依類型產生圓餅圖，方便看出餐飲、購物、交通、門票等支出比例。
+    </p>
+    <div class="actions">
+      <a routerLink="/fukuoka-2026" class="button secondary">← 回福岡行程</a>
+      <button class="button primary" type="button" (click)="addExamples()">加入範例</button>
+    </div>
+  </section>
+
+  <section class="grid">
+    <article class="card span-5">
+      <h2>➕ 新增消費</h2>
+      <form class="expense-form" (ngSubmit)="addExpense()">
+        <label>日期 <input type="date" name="date" [(ngModel)]="form.date" /></label>
+        <label
+          >類型
+          <select name="category" [(ngModel)]="form.category">
+            @for (category of categories; track category) {
+              <option [value]="category">{{ category }}</option>
+            }
+          </select>
+        </label>
+        <label
+          >店家 / 項目
+          <input
+            type="text"
+            name="item"
+            [(ngModel)]="form.item"
+            placeholder="例如：超商、UNIQLO、Marine World"
+            required
+        /></label>
+        <label
+          >金額（日幣）
+          <input
+            type="number"
+            name="amount"
+            [(ngModel)]="form.amount"
+            min="1"
+            step="1"
+            placeholder="例如：200"
+            required
+        /></label>
+        <label
+          >付款方式
+          <select name="payment" [(ngModel)]="form.payment">
+            @for (payment of payments; track payment) {
+              <option [value]="payment">{{ payment }}</option>
+            }
+          </select>
+        </label>
+        <label
+          >備註
+          <input
+            type="text"
+            name="note"
+            [(ngModel)]="form.note"
+            placeholder="可留空，例如：孩子點心"
+        /></label>
+        <button class="button primary full" type="submit">加入表格</button>
+        <button class="button secondary full" type="button" (click)="addExamples()">
+          加入範例：超商 200、UNIQLO 5000
+        </button>
+      </form>
+    </article>
+
+    <article class="card span-7">
+      <h2>📊 支出總覽</h2>
+      <div class="summary">
+        <div class="metric">
+          <span>總支出</span><strong>{{ formatJPY(totalJPY) }}</strong>
+        </div>
+        <div class="metric">
+          <span>約台幣</span><strong>{{ formatTWD(totalTWD) }}</strong>
+        </div>
+        <div class="metric">
+          <span>筆數</span><strong>{{ expenses.length }}</strong>
+        </div>
+      </div>
+      <div class="rate-row">
+        <label
+          >日幣 → 台幣估算匯率
+          <input type="number" min="0" step="0.001" [(ngModel)]="rate" (input)="onRateChange()"
+        /></label>
+        <button class="button danger" type="button" (click)="clearAll()">清空</button>
+      </div>
+    </article>
+
+    <article class="card span-7">
+      <h2>🧾 消費明細表</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>日期</th>
+              <th>類型</th>
+              <th>店家 / 項目</th>
+              <th>付款</th>
+              <th>金額 JPY</th>
+              <th>約 TWD</th>
+              <th>備註</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (expense of expenses; track expense.id) {
+              <tr>
+                <td>{{ expense.date }}</td>
+                <td>
+                  <span class="tag">{{ expense.category }}</span>
+                </td>
+                <td>{{ expense.item }}</td>
+                <td>{{ expense.payment }}</td>
+                <td>
+                  <b>{{ formatJPY(expense.amount) }}</b>
+                </td>
+                <td>{{ formatTWD(expense.amount * rate) }}</td>
+                <td class="muted">{{ expense.note }}</td>
+                <td>
+                  <button
+                    class="button danger compact"
+                    type="button"
+                    (click)="removeExpense(expense.id)"
+                  >
+                    刪除
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      @if (!expenses.length) {
+        <div class="empty">尚未新增消費。可以先按「加入範例」看看效果。</div>
+      }
+    </article>
+
+    <article class="card span-5">
+      <h2>🥧 類型圓餅圖</h2>
+      <div class="chart-box">
+        <canvas #pieCanvas width="420" height="420" aria-label="依消費類型分類的圓餅圖"></canvas>
+        <div class="legend">
+          @for (entry of categoryEntries; track entry[0]) {
+            <div class="legend-row">
+              <span class="legend-left"
+                ><i class="dot" [style.background]="colors[entry[0]]"></i>{{ entry[0] }}</span
+              >
+              <span
+                ><b>{{ formatJPY(entry[1]) }}</b>
+                <span class="muted">{{ percent(entry[1]) }}%</span></span
+              >
+            </div>
+          }
+        </div>
+      </div>
+    </article>
+  </section>
+</main>
