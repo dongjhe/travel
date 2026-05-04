@@ -2,34 +2,33 @@
   <section class="hero">
     <p class="eyebrow">Family Travel Planner</p>
     <h1>親子旅遊規劃</h1>
-    <p class="lead">整理機票、住宿、門票、交通與行程重點，讓每一次帶孩子出門都更輕鬆。</p>
-    <div class="actions">
-      <a routerLink="/fukuoka-2026" class="button primary">查看福岡行程</a>
-      <a routerLink="/fukuoka-2026/expenses" class="button secondary">福岡消費分析</a>
-    </div>
+    <p class="lead">
+      把每次旅行整理成清單：行程頁看每日安排，旅遊消費頁記錄該趟專屬支出，不會和其他旅程混在一起。
+    </p>
   </section>
 
-  <section id="sections" class="cards" aria-label="旅遊規劃分類">
-    <article>
-      <span>✈️</span>
-      <h2>機票</h2>
-      <p>比較航班時間、轉機次數、行李規則與兒童票需求。</p>
-    </article>
-    <article>
-      <span>🏨</span>
-      <h2>住宿</h2>
-      <p>篩選親子友善飯店、早餐、洗衣、嬰兒床與交通便利性。</p>
-    </article>
-    <article>
-      <span>🎟️</span>
-      <h2>門票</h2>
-      <p>彙整樂園、展館、體驗活動票價、優惠與退改政策。</p>
-    </article>
-    <article>
-      <span>🧭</span>
-      <h2>行程</h2>
-      <p>安排孩子作息、午睡、雨備、交通時間與每日亮點。</p>
-    </article>
+  <section class="trip-list" aria-label="旅遊行程清單">
+    <div class="section-title">
+      <p class="eyebrow">Trips</p>
+      <h2>行程清單</h2>
+    </div>
+
+    <a class="trip-row" routerLink="/fukuoka-2026" aria-label="前往福岡之旅行程">
+      <span class="trip-no">01</span>
+      <span class="trip-main">
+        <strong>福岡之旅</strong>
+        <span>2026/08/07 ~ 2026/08/12</span>
+      </span>
+      <a
+        class="expense-icon"
+        routerLink="/fukuoka-2026/expenses"
+        aria-label="前往福岡之旅旅遊消費"
+        title="旅遊消費"
+        (click)="$event.stopPropagation()"
+        >💴</a
+      >
+      <span class="arrow">→</span>
+    </a>
   </section>
 
   <section id="checklist" class="checklist">
