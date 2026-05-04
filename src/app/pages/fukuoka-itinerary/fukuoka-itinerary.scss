@@ -25,10 +25,34 @@
   box-sizing: border-box;
 }
 
+.home-link {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 950;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--line);
+  box-shadow: 0 14px 36px rgba(47, 72, 88, 0.14);
+  backdrop-filter: blur(14px);
+}
+
+.home-link:hover {
+  transform: translateY(-1px);
+}
+
 .wrap {
   width: min(1120px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 40px 0 64px;
+  padding: 72px 0 64px;
 }
 
 .hero {
