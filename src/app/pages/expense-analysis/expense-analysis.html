@@ -1,13 +1,13 @@
 <main class="wrap">
   <section class="hero">
     <p class="eyebrow">Travel Expense Analyzer</p>
-    <h1>旅遊消費分析</h1>
+    <h1>{{ tripName }}｜旅遊消費分析</h1>
     <p class="lead">
-      輸入日幣消費，例如「超商 200」、「UNIQLO 刷卡
-      5000」，系統會自動列成表格，並依類型產生圓餅圖，方便看出餐飲、購物、交通、門票等支出比例。
+      這個頁面的消費資料只會對應「{{ tripName }}」，不會和其他旅程共用。輸入日幣消費，例如「超商
+      200」、「UNIQLO 刷卡 5000」，系統會自動列成表格，並依類型產生圓餅圖。
     </p>
     <div class="actions">
-      <a routerLink="/fukuoka-2026" class="button secondary">← 回福岡行程</a>
+      <a [routerLink]="backLink" class="button secondary">← 回行程頁</a>
       <button class="button primary" type="button" (click)="addExamples()">加入範例</button>
     </div>
   </section>

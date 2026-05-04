@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 interface Expense {
   id: string;
@@ -37,9 +37,18 @@ export class ExpenseAnalysis implements AfterViewInit {
   expenses: Expense[] = [];
   rate = 0.22;
   form = this.emptyForm();
-  private readonly storageKey = 'travel-expenses';
+  tripId = 'general';
+  tripName = '旅遊行程';
+  backLink = '/';
+  storageKey = 'travel-expenses:general';
 
-  constructor() {
+  constructor(private readonly route: ActivatedRoute) {
+    const data = this.route.snapshot.data;
+    this.tripId = String(data['tripId'] ?? 'general');
+    this.tripName = String(data['tripName'] ?? '旅遊行程');
+    this.backLink = String(data['backLink'] ?? '/');
+    this.storageKey = `travel-expenses:${this.tripId}`;
+
     const saved = localStorage.getItem(this.storageKey);
     this.expenses = saved ? JSON.parse(saved) : [];
   }
@@ -111,7 +120,7 @@ export class ExpenseAnalysis implements AfterViewInit {
   }
 
   clearAll(): void {
-    if (!confirm('確定要清空所有消費資料嗎？')) return;
+    if (!confirm(`確定要清空「${this.tripName}」的所有消費資料嗎？`)) return;
     this.expenses = [];
     this.persistAndDraw();
   }
