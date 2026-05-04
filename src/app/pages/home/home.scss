@@ -180,17 +180,45 @@ h1 {
 
 @media (max-width: 720px) {
   .shell {
-    padding: 40px 0;
+    width: min(100% - 20px, 1120px);
+    padding: 28px 0 44px;
   }
 
   .hero,
   .trip-list,
   .checklist {
-    padding: 28px;
+    border-radius: 24px;
+    padding: 24px;
+  }
+
+  h1 {
+    font-size: clamp(2.35rem, 13vw, 3.5rem);
+  }
+
+  .lead {
+    margin-top: 18px;
+    font-size: 1.05rem;
   }
 
   .trip-row {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 48px 1fr;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .trip-no {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+  }
+
+  .expense-icon {
+    grid-column: 2;
+    width: fit-content;
+    min-width: 112px;
+    height: 42px;
+    padding: 0 12px;
+    justify-self: start;
   }
 
   .arrow {
@@ -198,12 +226,23 @@ h1 {
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 420px) {
+  .hero,
+  .trip-list,
+  .checklist {
+    padding: 20px;
+  }
+
   .trip-row {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
+  }
+
+  .trip-no,
+  .expense-icon {
+    grid-column: auto;
   }
 
   .trip-no {
-    grid-column: 1 / -1;
+    justify-self: start;
   }
 }

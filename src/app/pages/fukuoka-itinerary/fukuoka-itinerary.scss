@@ -353,25 +353,124 @@ footer {
 }
 
 @media (max-width: 760px) {
+  .home-link {
+    top: 12px;
+    right: 10px;
+    min-height: 40px;
+    padding: 0 12px;
+    font-size: 0.92rem;
+  }
+
+  .wrap {
+    width: min(100% - 20px, 1120px);
+    padding: 64px 0 44px;
+  }
+
+  .hero {
+    padding: 28px;
+    border-radius: 26px;
+  }
+
+  h1 {
+    font-size: clamp(2.25rem, 12vw, 3.6rem);
+  }
+
+  .lead {
+    font-size: 1.02rem;
+  }
+
+  .chips {
+    gap: 8px;
+  }
+
+  .chip {
+    padding: 7px 11px;
+    font-size: 0.9rem;
+  }
+
+  .quick-nav,
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .quick-link {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .quick-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+  }
+
+  .card {
+    grid-column: span 12;
+    padding: 18px;
+    border-radius: 20px;
+  }
+
   .half,
   .third {
     grid-column: span 12;
   }
+
   .flight {
     grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 15px;
   }
+
   .arrow {
     display: none;
   }
+
+  .airport {
+    font-size: 1.12rem;
+  }
+
+  .time {
+    font-size: 1.32rem;
+  }
+
   .day {
     grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 18px 0;
   }
+
   .date {
     position: static;
     text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
-  .quick-nav {
-    grid-template-columns: 1fr;
+
+  .date strong {
+    font-size: 1.2rem;
+  }
+
+  .slot {
+    padding: 13px 14px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero,
+  .card {
+    padding: 16px;
+  }
+
+  .quick-link {
+    align-items: flex-start;
   }
 }
 
